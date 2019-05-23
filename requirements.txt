@@ -1,0 +1,16 @@
+azure-cognitiveservices-nspkg==3.0.1
+azure-cognitiveservices-search-imagesearch==1.0.0
+azure-cognitiveservices-search-nspkg==3.0.1
+azure-common==1.1.21
+azure-nspkg==3.0.2
+certifi==2019.3.9
+chardet==3.0.4
+facebook-sdk==3.1.0
+idna==2.8
+isodate==0.6.0
+msrest==0.6.6
+oauthlib==3.0.1
+requests==2.22.0
+requests-oauthlib==1.2.0
+six==1.12.0
+urllib3==1.25.2
