@@ -88,7 +88,7 @@ def separate(etym_text):
             etym_text = etym_text.replace(sep, ' {} '.format(sep))
     return etym_text
 
-def send(data, context):
+def post_etym(data, context):
     with open("creds.json", "r") as f:
         creds = json.load(f)
     success = True
