@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import requests
-from flask import Flask
 import json
 import re
 import random
@@ -10,13 +9,9 @@ from azure.cognitiveservices.search.imagesearch import ImageSearchAPI
 from azure.cognitiveservices.search.imagesearch.models import SafeSearch
 from msrest.authentication import CognitiveServicesCredentials
 
-app = Flask(__name__)
-
 MAX_RETRIES = 4
 SEP_WORDS = ['German','Latin','English','Greek','Germanic','French','Dutch']
 
-with open("creds.json", "r") as f:
-    creds = json.load(f)
 
 # returns str
 def _get_word(filename="OED_processed.txt"):
@@ -93,17 +88,19 @@ def separate(etym_text):
             etym_text = etym_text.replace(sep, ' {} '.format(sep))
     return etym_text
 
-success = True
-graph = facebook.GraphAPI(access_token=creds['facebook']['token'], version='3.1')
-@app.route('/send')
-def send():
+def send(data, context):
+    with open("creds.json", "r") as f:
+        creds = json.load(f)
+    success = True
+    graph = facebook.GraphAPI(access_token=creds['facebook']['token'])
     # try until success of MAX_RETRIES
     for i in range(0,MAX_RETRIES):
         word = get_word()
+        logging.info("got word {}".format(word))
         try:
             success = True
             try:
-                img = get_image(get_word(), creds['azure']['key'], creds['azure']['endpoint'])
+                img = get_image(word, creds['azure']['key'], creds['azure']['endpoint'])
             except:
                 with open('404.JPG', 'rb') as f:
                     img = f.read()
@@ -124,8 +121,3 @@ def send():
 
     if not success:
         logging.fatal("couldn't successfully send")
-
-if __name__ == '__main__':
-    # This is used when running locally. Gunicorn is used to run the
-    # application on Google App Engine. See entrypoint in app.yaml.
-    app.run(debug=True)
