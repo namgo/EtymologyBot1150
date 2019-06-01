@@ -1,4 +1,0 @@
-cron:
-- description: "run every 1 hour"
-  url: /send
-  schedule: every 1 hours
