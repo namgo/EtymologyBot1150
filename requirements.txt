@@ -3,7 +3,7 @@ azure-cognitiveservices-search-imagesearch==1.0.0
 azure-cognitiveservices-search-nspkg==3.0.1
 azure-common==1.1.21
 azure-nspkg==3.0.2
-certifi==2019.3.9
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 facebook-sdk==3.1.0
